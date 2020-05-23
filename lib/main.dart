@@ -1,7 +1,18 @@
+import 'dart:async';
+
+import 'package:Timba/test/restart_for_testing.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
+}
+
+void test(StreamController<int> streamController) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(RestartWidget(
+    child: MyApp(),
+    streamController: streamController,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -102,12 +113,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
+              key: Key('Counter'),
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: Key('Button'),
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
