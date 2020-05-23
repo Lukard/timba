@@ -1,4 +1,4 @@
-![Timba CI](https://github.com/Lukard/timba/workflows/Flutter%20CI/badge.svg?branch=master)
+![Timba CI](https://github.com/Lukard/timba/workflows/Timba%20CI/badge.svg?branch=master)
 
 # Timba
 
