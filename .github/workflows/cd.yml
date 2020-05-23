@@ -16,6 +16,8 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
+      - name: Get packages
+        run: flutter pub get
       - name: Install peanut
         run: flutter pub global activate peanut
       - name: Run peanut
