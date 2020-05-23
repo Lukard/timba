@@ -1,3 +1,5 @@
+![Timba CI](https://github.com/Lukard/timba/workflows/Flutter%20CI/badge.svg?branch=master)
+
 # Timba
 
 Estimate your tasks in this scrum poker planning session

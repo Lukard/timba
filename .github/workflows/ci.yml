@@ -1,4 +1,4 @@
-name: Flutter CI
+name: Timba CI
 
 on:
   push:
