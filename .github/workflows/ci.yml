@@ -40,7 +40,7 @@ jobs:
       #- name: Go to web drivers folder
       #  run: cd web_installers/packages/web_drivers/
       - name: Get web drivers packages
-        run: pub get
+        run: flutter pub get
       - name: Install web driver
         run: dart lib/web_driver_installer.dart &
       - name: Wait for completion
@@ -51,8 +51,8 @@ jobs:
         run: sleep 5
       #- name: Go back to the project
       #  run: cd ../../../
-      - name: Get packages
-        run: flutter pub get
+      #- name: Get packages
+      #  run: flutter pub get
       - name: Run web flutter driver tests
         run: flutter drive --target=test_driver/app.dart -d web-server --release --browser-name=chrome --web-port=8080
   end-to-end-Android:
