@@ -31,28 +31,17 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      - name: Enable web for Flutter
-        run: flutter config --enable-web
-      - name: Clone web installers
-        uses: actions/checkout@master
-        with:
-          name: flutter/web_installers
-      #- name: Go to web drivers folder
-      #  run: cd web_installers/packages/web_drivers/
-      - name: Get web drivers packages
-        run: flutter pub get
-      - name: Install web driver
-        run: dart lib/web_driver_installer.dart &
-      - name: Wait for completion
-        run: sleep 20
-      - name: Run Chrome driver
-        run: chromedriver/chromedriver --port=4444 &
-      - name: Wait Chrome driver for initialization
-        run: sleep 5
-      #- name: Go back to the project
-      #  run: cd ../../../
-      #- name: Get packages
-      #  run: flutter pub get
+      - name: Prepare flutter web environment
+        run: |
+          flutter config --enable-web
+          git clone https://github.com/flutter/web_installers.git
+          cd web_installers/packages/web_drivers/
+          pub get
+          dart lib/web_driver_installer.dart &
+          sleep 20
+          chromedriver/chromedriver --port=4444 &
+          sleep 5
+          cd ../../../
       - name: Run web flutter driver tests
         run: flutter drive --target=test_driver/app.dart -d web-server --release --browser-name=chrome --web-port=8080
   end-to-end-Android:
