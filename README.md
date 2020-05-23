@@ -11,6 +11,7 @@ This product must be able to be used by anyone, so the more platforms where it r
 the more accessible it is the better.
 
 ## Technology
+### Frontend framework
 The frontend technology chosen to develop this project is: [Flutter](https://flutter.dev/)
 
 The main reasons to choose Flutter as development frontend framework:
@@ -23,3 +24,20 @@ questions on stackoverflow. So in case of needing help I know where to look for 
 possible. Meanwhile, Google is well-known for abruptly abandoning some of their project 
 (I still love Project Tango). However, Flutter is being really well-received by developer
 community, and it will be the main framework for building apps in Fuchsia.
+
+### Continuous Integration / Delivery
+**Github Actions** is the chosen solution for continuous integration / delivery because:
+- Integrated in the repository
+- Huge community developing really useful actions
+- Free for open-source projects
+- Linux, MacOs and Windows supported, so it fits the compilation needs of this project
+
+## Continuous Integration
+The Continuous Integration system for this project will run on every push/merge to master 
+and every push to a pull request. There are four things that will be checked:
+- Unit tests
+- End to end tests for Web
+- End to end tests for Android
+- End to end tests for iOS
+
+If all those four checks are green you will be able to merge your branch to master.
