@@ -10,10 +10,6 @@ jobs:
     name: Publish web
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          ref: 'gh-pages'
       - name: Checkout master branch
         uses: actions/checkout@v2
       - name: Install flutter
@@ -31,4 +27,4 @@ jobs:
       - name: Run peanut
         run: flutter pub global run peanut:peanut
       - name: Push changes to origin/gh-pages
-        run: git push origin --set-upstream gh-pages
+        run: git push origin --set-upstream gh-pages --force
