@@ -31,7 +31,7 @@ jobs:
       - name: Run peanut
         run: flutter pub global run peanut:peanut
       - name: Push changes to origin/gh-pages
-        uses: ad-m/github-push-action@master
+        run: git push origin --set-upstream gh-pages
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: 'gh-pages'
