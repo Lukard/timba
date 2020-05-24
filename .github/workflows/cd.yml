@@ -20,6 +20,10 @@ jobs:
         run: flutter pub get
       - name: Install peanut
         run: flutter pub global activate peanut
+      - name: Set Github user
+        run: |
+          git config --global user.name Lukard
+          git config --global user.password ${{ secrets.GITHUB_TOKEN }}
       - name: Run peanut
         run: flutter pub global run peanut:peanut
       - name: Push changes to origin/gh-pages
