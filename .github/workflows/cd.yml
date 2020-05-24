@@ -16,6 +16,8 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
+      - name: Print branch name
+        run: git rev-parse --abbrev-ref HEAD
       - name: Run peanut
         run: |
           flutter pub global activate peanut
