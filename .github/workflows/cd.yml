@@ -10,21 +10,20 @@ jobs:
     name: Publish web
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout master branch
+      - name: Checkout the branch
         uses: actions/checkout@v2
-      - name: Install flutter
-        uses: subosito/flutter-action@v1
-        with:
-          channel: 'beta'
+      - name: Setup Flutter
+        run: |
+          git clone https://github.com/flutter/flutter.git --depth 1 -b beta _flutter
+          echo "::add-path::${GITHUB_WORKSPACE}/_flutter/bin"
+      - name: Enable Flutter web
+        run: flutter config --enable-web
       - name: Get packages
         run: flutter pub get
-      - name: Install peanut
-        run: flutter pub global activate peanut
-      - name: Set Github user
-        run: |
-          git config --global user.name Lukard
-          git config --global user.password ${{ secrets.GITHUB_TOKEN }}
-      - name: Run peanut
-        run: flutter pub global run peanut:peanut
-      - name: Push changes to origin/gh-pages
-        run: git push origin --set-upstream gh-pages --force
+      - name: Build
+        run: flutter build web
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
