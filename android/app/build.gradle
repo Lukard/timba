@@ -49,7 +49,7 @@ android {
         release {
             keyAlias 'key'
             keyPassword "$System.env.KEY_PASSWORD"
-            storeFile file("../key.jks")
+            storeFile file("../../key.jks")
             storePassword "$System.env.KEY_PASSWORD"
         }
     }
