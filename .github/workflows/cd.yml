@@ -10,7 +10,11 @@ jobs:
     name: Publish web
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the branch
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: 'gh-pages'
+      - name: Checkout master branch
         uses: actions/checkout@v2
       - name: Install flutter
         uses: subosito/flutter-action@v1
