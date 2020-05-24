@@ -2,8 +2,8 @@ name: Timba CD
 
 on:
   push:
-    #branches:
-    #  - master
+    branches:
+      - master
 
 jobs:
   publish-web:
