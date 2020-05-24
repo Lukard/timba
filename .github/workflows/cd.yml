@@ -16,12 +16,10 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
-      - name: Get packages
-        run: flutter pub get
-      - name: Install peanut
-        run: flutter pub global activate peanut
       - name: Run peanut
-        run: flutter pub global run peanut:peanut
+        run: |
+          flutter pub global activate peanut
+          flutter pub global run peanut:peanut
       - name: Push changes to origin/gh-pages
         uses: ad-m/github-push-action@master
         with:
