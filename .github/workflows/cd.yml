@@ -18,7 +18,7 @@ jobs:
           channel: 'beta'
       - name: Get packages
         run: flutter pub get
-      - name: Run peanut
+      - name: Install peanut
         run: flutter pub global activate peanut
       - name: Run peanut
         run: flutter pub global run peanut:peanut
