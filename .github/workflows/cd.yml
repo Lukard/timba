@@ -39,13 +39,16 @@ jobs:
           channel: 'beta'
       - name: Get packages
         run: flutter pub get
-      - name: Release compilation
-        run: |
-          echo $KEY_JKS > key.jks
-          flutter build apk --release
+      - name: Generate keystore
+        run: echo $KEY_JKS | base64 -d > android/app/key.jks
         env:
           KEY_JKS: ${{ secrets.KEY_JKS }}
+      - name: Release compilation
+        run: flutter build apk --release
+        env:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PATH: key.jks
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
