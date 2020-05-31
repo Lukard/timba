@@ -4,7 +4,7 @@ const RESOURCES = {
   "main.dart.js": "4dbf1585f5d5f0f9d1f1b63739618814",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
 "assets/FontManifest.json": "01700ba55b08a6141f33e168c4a6c22f",
-"assets/LICENSE": "ac9f508e30c1fcd35827fd9ad293dcee",
+"assets/LICENSE": "8c61598cf05798fd3630d4a2c1131d4e",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "115e937bb829a890521f72d2e664b632",
 "assets/AssetManifest.json": "2efbb41d7877d10aac9d091f58ccd7b9",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
