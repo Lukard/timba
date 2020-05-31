@@ -33,6 +33,37 @@ jobs:
     steps:
       - name: Checkout the branch
         uses: actions/checkout@v2
+      - name: Read last version tag
+          run: |
+            git fetch --prune --unshallow
+            git describe --tags `git rev-list --tags --max-count=1` | read current_veresion
+            echo $current_version
+      - name: Set curent build version
+        run: |
+          echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 1 | read current_build_version
+          echo $current_build_version
+      - name: Set current build version patch
+        run: |
+          echo $current_build_version | cut -d'.' -f 3 | read current_build_version_patch
+          echo $current_build_version_patch
+      - name: Set current build version major and minor
+        run: |
+          echo $current_build_version | cut -d'.' -f 1,2 | read current_build_version_major_minor
+          echo current_build_version_major_minor
+      - name: Increment version patch
+        run: |
+          let "current_build_version_patch++"
+          echo current_build_version_patch
+      - name: Set next build version
+        run: |
+          echo $current_build_version_major_minor.$current_build_version_patch | read next_build_version
+          echo $next_build_version
+      - name: Set current build number
+        run: echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 2 | read next_build_number
+      - name: Set next build number
+        run: let "next_build_number++"
+      - name: Print next build number tag
+        run: echo v$next_build_version+$next_build_number
       - name: Install flutter
         uses: subosito/flutter-action@v1
         with:
@@ -43,24 +74,6 @@ jobs:
         run: echo $KEY_JKS | base64 -d > android/app/key.jks
         env:
           KEY_JKS: ${{ secrets.KEY_JKS }}
-      - name: Read last version tag
-        run: |
-          git fetch --prune --unshallow
-          git describe --tags `git rev-list --tags --max-count=1` | read current_veresion
-      - name: Set curent build version
-        run: echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 1 | read current_build_version
-      - name: Set next build version
-        run: |
-          echo $current_build_version | cut -d'.' -f 3 | read current_build_version_patch
-          echo $current_build_version | cut -d'.' -f 1,2 | read current_build_version_major_minor
-          let "current_build_version_patch++"
-          echo $current_build_version_major_minor.$current_build_version_patch | read next_build_version
-      - name: Set current build number
-        run: echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 2 | read next_build_number
-      - name: Set next build number
-        run: let "next_build_number++"
-      - name: Print next build number tag
-        run: echo v$next_build_version+$next_build_number
       - name: Release compilation
         run: flutter build appbundle --release --build-name $next_build_version --build-number $next_build_number
         env:
