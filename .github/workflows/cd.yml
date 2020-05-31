@@ -37,7 +37,7 @@ jobs:
         run: |
           git fetch --prune --unshallow
           echo "::set-env name=CURRENT_TAG_VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
-          echo ${ CURRENT_TAG_VERSION }
+          echo ${{ env.CURRENT_TAG_VERSION }}
       - name: Set curent build version
         run: |
           echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 1 | read current_build_version
