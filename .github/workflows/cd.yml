@@ -44,7 +44,9 @@ jobs:
         env:
           KEY_JKS: ${{ secrets.KEY_JKS }}
       - name: Read last version tag
-        run: git describe --tags | read current_veresion
+        run: |
+          git fetch --prune -unshallow
+          git describe --tags | read current_veresion
       - name: Set curent build version
         run: echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 1 | read current_build_version
       - name: Set next build version
