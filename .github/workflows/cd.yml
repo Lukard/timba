@@ -37,37 +37,22 @@ jobs:
         run: |
           git fetch --prune --unshallow
           echo "::set-env name=CURRENT_VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
-          echo ${{ env.CURRENT_VERSION }}
       - name: Set current build version
-        run: |
-          echo "::set-env name=CURRENT_BUILD_VERSION::$(echo ${{ env.CURRENT_VERSION }} | cut -d'v' -f 2 | cut -d'+' -f 1)"
-          echo ${{ env.CURRENT_BUILD_VERSION }}
+        run: echo "::set-env name=CURRENT_BUILD_VERSION::$(echo ${{ env.CURRENT_VERSION }} | cut -d'v' -f 2 | cut -d'+' -f 1)"
       - name: Set current build version patch
-        run: |
-          echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$(echo $CURRENT_BUILD_VERSION | cut -d'.' -f 3)"
-          echo $CURRENT_BUILD_VERSION_PATCH
+        run: echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$(echo ${{ env.CURRENT_BUILD_VERSION }} | cut -d'.' -f 3)"
       - name: Set current build version major and minor
-        run: |
-          echo "::set-env name=CURRENT_BUILD_VERSION_MAJOR_MINOR::$(echo $CURRENT_BUILD_VERSION | cut -d'.' -f 1,2)"
-          echo $CURRENT_BUILD_VERSION_MAJOR_MINOR
+        run: echo "::set-env name=CURRENT_BUILD_VERSION_MAJOR_MINOR::$(echo ${{ env.CURRENT_BUILD_VERSION }} | cut -d'.' -f 1,2)"
       - name: Increment version patch
-        run: |
-          echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$(($CURRENT_BUILD_VERSION_PATCH+1))"
-          echo $CURRENT_BUILD_VERSION_PATCH
+        run: echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$((${{ env.CURRENT_BUILD_VERSION_PATCH }}+1))"
       - name: Set next build version
-        run: |
-          echo "::set-env name=NEXT_BUILD_VERSION::$(echo $CURRENT_BUILD_VERSION_MAJOR_MINOR.$CURRENT_BUILD_VERSION_PATCH)"
-          echo $NEXT_BUILD_VERSION
+        run: echo "::set-env name=NEXT_BUILD_VERSION::$(echo ${{ env.CURRENT_BUILD_VERSION_MAJOR_MINOR }}.${{ env.CURRENT_BUILD_VERSION_PATCH }})"
       - name: Set current build number
-        run: |
-          echo "::set-env name=NEXT_BUILD_NUMBER::$(echo $CURRENT_VERSION | cut -d'v' -f 2 | cut -d'+' -f 2)"
-          echo $NEXT_BUILD_NUMBER
+        run: echo "::set-env name=NEXT_BUILD_NUMBER::$(echo ${{ env.CURRENT_VERSION }} | cut -d'v' -f 2 | cut -d'+' -f 2)"
       - name: Set next build number
-        run: |
-          echo "::set-env name=NEXT_BUILD_NUMBER::$(($NEXT_BUILD_NUMBER+1))"
-          echo $NEXT_BUILD_NUMBER
+        run: echo "::set-env name=NEXT_BUILD_NUMBER::$((${{ env.NEXT_BUILD_NUMBER }}+1))"
       - name: Print next build number tag
-        run: echo v$NEXT_BUILD_VERSION+$NEXT_BUILD_NUMBER
+        run: echo v${{ env.NEXT_BUILD_VERSION }}+${{ env.NEXT_BUILD_NUMBER }}
       - name: Install flutter
         uses: subosito/flutter-action@v1
         with:
@@ -91,9 +76,9 @@ jobs:
           packageName: com.lukard.timba
           track: alpha
           releaseFile: build/app/outputs/bundle/release/app-release.aab
+      - name: Create new git version tag
+        run: echo "::set-env name=NEXT_GIT_TAG::'v${{ env.NEXT_BUILD_VERSION }}+${{ env.NEXT_BUILD_NUMBER }}'"
       - name: Update git version tag
-        run: |
-          echo v$next_build_version+$next_build_number | read next_git_tag
-          git tag $next_git_tag
+        run: git tag $NEXT_GIT_TAG
       - name: Push git tag
-        run: git push origin $next_git_tag
+        run: git push origin $NEXT_GIT_TAG
