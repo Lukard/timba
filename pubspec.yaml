@@ -33,6 +33,14 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   build_web_compilers:
+  flutter_launcher_icons: ^0.7.5
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "asset/icon/launcher/icon_full.png"
+  adaptive_icon_background: "#151515"
+  adaptive_icon_foreground: "asset/icon/launcher/icon_foreground.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
