@@ -37,18 +37,18 @@ jobs:
         run: |
           git fetch --prune --unshallow
           echo "::set-env name=CURRENT_VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
-          echo $CURRENT_VERSION
+          echo ${{ env.CURRENT_VERSION }}
       - name: Set current build version
         run: |
-          echo "::set-env name=CURRENT_BUILD_VERSION::$(echo $CURRENT_VERSION | cut -d'v' -f 2 | cut -d'+' -f 1)"
-          echo $CURRENT_BUILD_VERSION
+          echo "::set-env name=CURRENT_BUILD_VERSION::$(echo ${{ env.CURRENT_VERSION }} | cut -d'v' -f 2 | cut -d'+' -f 1)"
+          echo ${{ env.CURRENT_BUILD_VERSION }}
       - name: Set current build version patch
         run: |
           echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$(echo $CURRENT_BUILD_VERSION | cut -d'.' -f 3)"
           echo $CURRENT_BUILD_VERSION_PATCH
       - name: Set current build version major and minor
         run: |
-          echo "::set-env name=CURRENT_BUILD_VERSION_MAJOR_MINOR::$(echo $current_build_version | cut -d'.' -f 1,2)"
+          echo "::set-env name=CURRENT_BUILD_VERSION_MAJOR_MINOR::$(echo $CURRENT_BUILD_VERSION | cut -d'.' -f 1,2)"
           echo $CURRENT_BUILD_VERSION_MAJOR_MINOR
       - name: Increment version patch
         run: |
