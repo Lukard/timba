@@ -43,14 +43,38 @@ jobs:
         run: echo $KEY_JKS | base64 -d > android/app/key.jks
         env:
           KEY_JKS: ${{ secrets.KEY_JKS }}
+      - name: Read last version tag
+        run: git describe --tags | read current_veresion
+      - name: Set curent build version
+        run: echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 1 | read current_build_version
+      - name: Set next build version
+        run: |
+          echo $current_build_version | cut -d'.' -f 3 | read current_build_version_patch
+          echo $current_build_version | cut -d'.' -f 1,2 | read current_build_version_major_minor
+          let "current_build_version_patch++"
+          echo $current_build_version_major_minor.$current_build_version_patch | read next_build_version
+      - name: Set current build number
+        run: echo $current_veresion | cut -d'v' -f 2 | cut -d'+' -f 2 | read next_build_number
+      - name: Set next build number
+        run: let "next_build_number++"
+      - name: Print next build number tag
+        run: echo v$next_build_version+$next_build_number
       - name: Release compilation
-        run: flutter build apk --release
+        run: flutter build appbundle --release --build-name $next_build_version --build-number $next_build_number
         env:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PATH: key.jks
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+      - name: Publish Google Play (Alpha)
+        uses: r0adkll/upload-google-play@v1
         with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+          serviceAccountJson: ${{ SERVICE_ACCOUNT_JSON }}
+          packageName: com.lukard.timba
+          track: alpha
+          releaseFile: build/app/outputs/bundle/release/app-release.aab
+      - name: Update git version tag
+        run: |
+          echo v$next_build_version+$next_build_number | read next_git_tag
+          git tag $next_git_tag
+      - name: Push git tag
+        run: git push origin $next_git_tag
