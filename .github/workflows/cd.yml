@@ -68,7 +68,7 @@ jobs:
       - name: Publish Google Play (Alpha)
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ SERVICE_ACCOUNT_JSON }}
+          serviceAccountJsonPlainText: ${{ SERVICE_ACCOUNT_JSON }}
           packageName: com.lukard.timba
           track: alpha
           releaseFile: build/app/outputs/bundle/release/app-release.aab
