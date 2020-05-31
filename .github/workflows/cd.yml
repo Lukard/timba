@@ -64,7 +64,7 @@ jobs:
         env:
           KEY_JKS: ${{ secrets.KEY_JKS }}
       - name: Release compilation
-        run: flutter build appbundle --release --build-name $next_build_version --build-number $next_build_number
+        run: flutter build appbundle --release --build-name ${{ env.NEXT_BUILD_VERSION }} --build-number ${{ env.NEXT_BUILD_NUMBER }}
         env:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
