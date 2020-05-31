@@ -36,7 +36,7 @@ jobs:
       - name: Read last version tag
         run: |
           git fetch --prune --unshallow
-          git describe --tags `git rev-list --tags --max-count=1` | read current_veresion
+          git describe --tags `git rev-list --tags --max-count=1` | read current_version
           echo $current_version
       - name: Set curent build version
         run: |
