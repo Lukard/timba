@@ -1,4 +1,4 @@
-package com.lukard.timba.Timba
+package com.lukard.timba
 
 import io.flutter.embedding.android.FlutterActivity
 

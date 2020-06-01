@@ -27,3 +27,58 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
+  publish-android:
+    name: Publish Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the branch
+        uses: actions/checkout@v2
+      - name: Read last version tag
+        run: |
+          git fetch --prune --unshallow
+          echo "::set-env name=CURRENT_VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
+      - name: Set current build version
+        run: echo "::set-env name=CURRENT_BUILD_VERSION::$(echo ${{ env.CURRENT_VERSION }} | cut -d'v' -f 2 | cut -d'+' -f 1)"
+      - name: Set current build version patch
+        run: echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$(echo ${{ env.CURRENT_BUILD_VERSION }} | cut -d'.' -f 3)"
+      - name: Set current build version major and minor
+        run: echo "::set-env name=CURRENT_BUILD_VERSION_MAJOR_MINOR::$(echo ${{ env.CURRENT_BUILD_VERSION }} | cut -d'.' -f 1,2)"
+      - name: Increment version patch
+        run: echo "::set-env name=CURRENT_BUILD_VERSION_PATCH::$((${{ env.CURRENT_BUILD_VERSION_PATCH }}+1))"
+      - name: Set next build version
+        run: echo "::set-env name=NEXT_BUILD_VERSION::$(echo ${{ env.CURRENT_BUILD_VERSION_MAJOR_MINOR }}.${{ env.CURRENT_BUILD_VERSION_PATCH }})"
+      - name: Set current build number
+        run: echo "::set-env name=NEXT_BUILD_NUMBER::$(echo ${{ env.CURRENT_VERSION }} | cut -d'v' -f 2 | cut -d'+' -f 2)"
+      - name: Set next build number
+        run: echo "::set-env name=NEXT_BUILD_NUMBER::$((${{ env.NEXT_BUILD_NUMBER }}+1))"
+      - name: Print next build number tag
+        run: echo v${{ env.NEXT_BUILD_VERSION }}+${{ env.NEXT_BUILD_NUMBER }}
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'beta'
+      - name: Get packages
+        run: flutter pub get
+      - name: Generate keystore
+        run: echo $KEY_JKS | base64 -d > android/app/key.jks
+        env:
+          KEY_JKS: ${{ secrets.KEY_JKS }}
+      - name: Release compilation
+        run: flutter build appbundle --release --build-name ${{ env.NEXT_BUILD_VERSION }} --build-number ${{ env.NEXT_BUILD_NUMBER }}
+        env:
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PATH: key.jks
+      - name: Publish Google Play (Alpha)
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: com.lukard.timba
+          track: alpha
+          releaseFile: build/app/outputs/bundle/release/app-release.aab
+      - name: Create new git version tag
+        run: echo "::set-env name=NEXT_GIT_TAG::'v${{ env.NEXT_BUILD_VERSION }}+${{ env.NEXT_BUILD_NUMBER }}'"
+      - name: Update git version tag
+        run: git tag $NEXT_GIT_TAG
+      - name: Push git tag
+        run: git push origin $NEXT_GIT_TAG
