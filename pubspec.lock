@@ -228,6 +228,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_launcher_icons:
+    dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.5"
   flutter_test:
     dependency: transitive
     description: flutter
@@ -280,6 +287,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.13"
   intl:
     dependency: transitive
     description:
@@ -392,6 +406,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.4"
   platform:
     dependency: transitive
     description:
@@ -628,6 +649,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.2"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.7.0"
   yaml:
     dependency: transitive
     description:
