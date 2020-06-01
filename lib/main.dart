@@ -37,7 +37,11 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
+        PrivacyPolicy.route: (context) => PrivacyPolicy()
+      },
     );
   }
 }
@@ -127,4 +131,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class PrivacyPolicy extends StatelessWidget {
+  static const String route = '/privacy-policy';
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('No personal information is gathered. Enjoy! :)'),
+    );
+  }
+
 }
