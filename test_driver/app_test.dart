@@ -11,8 +11,6 @@ void main() {
     setUp(() async {
       driver = await FlutterDriver.connect();
       driver.requestData('holi');
-      counter = find.byValueKey('Counter');
-      button = find.byValueKey('Button');
     });
 
     tearDown(() async {
@@ -21,12 +19,16 @@ void main() {
       }
     });
 
-    test('when click on plus button then it adds one to counter', () async {
-      expect(await driver.getText(counter), '0');
-
-      await driver.tap(button);
-
-      expect(await driver.getText(counter), '1');
+    test('when game starts then it shows the whole grid', () async {
+      await driver.waitFor(find.text('0'));
+      await driver.waitFor(find.text('1'));
+      await driver.waitFor(find.text('2'));
+      await driver.waitFor(find.text('3'));
+      await driver.waitFor(find.text('5'));
+      await driver.waitFor(find.text('8'));
+      await driver.waitFor(find.text('13'));
+      await driver.waitFor(find.text('?'));
+      await driver.waitFor(find.text('☕️'));
     });
   });
 }
