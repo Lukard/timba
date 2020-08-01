@@ -1,4 +1,4 @@
-name: Timba CD
+name: Timba CD (Web)
 
 on:
   push:
@@ -6,27 +6,6 @@ on:
       - master
 
 jobs:
-  publish-web:
-    name: Publish web
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the branch
-        uses: actions/checkout@v2
-      - name: Setup Flutter
-        run: |
-          git clone https://github.com/flutter/flutter.git --depth 1 -b beta _flutter
-          echo "::add-path::${GITHUB_WORKSPACE}/_flutter/bin"
-      - name: Enable Flutter web
-        run: flutter config --enable-web
-      - name: Get packages
-        run: flutter pub get
-      - name: Build
-        run: flutter build web
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
   publish-android:
     name: Publish Android
     runs-on: ubuntu-latest
