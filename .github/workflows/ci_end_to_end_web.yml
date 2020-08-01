@@ -1,0 +1,32 @@
+name: Timba CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  end-to-end-web:
+    name: End to end tests (Web)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the branch
+        uses: actions/checkout@v1
+      - name: Install flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'beta'
+      - name: Prepare flutter web environment
+        run: |
+          flutter config --enable-web
+          git clone https://github.com/flutter/web_installers.git
+          cd web_installers/packages/web_drivers/
+          pub get
+          dart lib/web_driver_installer.dart &
+          sleep 20
+          chromedriver/chromedriver --port=4444 &
+          sleep 5
+          cd ../../../
+      - name: Run web flutter driver tests
+        run: flutter drive --target=test_driver/app.dart -d web-server --release --browser-name=chrome --web-port=8080
