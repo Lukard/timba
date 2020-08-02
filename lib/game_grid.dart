@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GameGrid extends StatelessWidget {
   static const String route = '/';
@@ -27,7 +28,9 @@ class GameGrid extends StatelessWidget {
               child: Center(
                 child: Text(
                   cardNumber(index),
-                  style: Theme.of(context).textTheme.headline2,
+                  style: GoogleFonts.libreBaskerville(
+                    textStyle: Theme.of(context).textTheme.headline2,
+                  ),
                 ),
               ),
             ),
