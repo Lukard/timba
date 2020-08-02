@@ -1,4 +1,4 @@
-name: Timba CI
+name: Timba CI - Unit tests
 
 on:
   push:
