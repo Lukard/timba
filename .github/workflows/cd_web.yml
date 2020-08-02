@@ -1,4 +1,4 @@
-name: Timba CD (Web)
+name: Timba CD - Publish Web
 
 on:
   push:

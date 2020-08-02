@@ -1,4 +1,4 @@
-name: Timba CI
+name: Timba CI - End to end Android
 
 on:
   push:
