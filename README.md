@@ -1,4 +1,10 @@
-![Timba CI](https://github.com/Lukard/timba/workflows/Timba%20CI/badge.svg?branch=master)
+![Timba CI - Unit Tests](https://github.com/Lukard/timba/workflows/Timba%20CI%20-%20Unit%20tests/badge.svg?branch=master)
+![Timba CI - End to End Web](https://github.com/Lukard/timba/workflows/Timba%20CI%20-%20End%20to%20end%20Web/badge.svg?branch=master)
+![Timba CI - End to End iOS](https://github.com/Lukard/timba/workflows/Timba%20CI%20-%20End%20to%20end%20iOS/badge.svg?branch=master)
+![Timba CI - End to End Android](https://github.com/Lukard/timba/workflows/Timba%20CI%20-%20End%20to%20end%20Android/badge.svg?branch=master)
+![Timba CD - Publish Web](https://github.com/Lukard/timba/workflows/Timba%20CD%20-%20Publish%20Web/badge.svg)
+![Timba CD - Publish Android](https://github.com/Lukard/timba/workflows/Timba%20CD%20-%20Publish%20Android/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/Lukard/timba/branch/master/graph/badge.svg)](https://codecov.io/gh/Lukard/timba)
 
 # Timba
 
