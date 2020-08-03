@@ -13,13 +13,14 @@ jobs:
     steps:
       - name: Checkout the branch
         uses: actions/checkout@v2
-      - name: Setup Flutter (with Null-safety error workaround)
+      - name: Setup Flutter
         run: |
           git clone https://github.com/flutter/flutter.git
+          echo "::add-path::${GITHUB_WORKSPACE}/_flutter/bin"
+      - name: Set specific Flutter version (Null-safety error workaround)
           flutter version 1.19.0-4.3.pre
           flutter doctor
           flutter clean
-          echo "::add-path::${GITHUB_WORKSPACE}/_flutter/bin"
       - name: Enable Flutter web
         run: flutter config --enable-web
       - name: Get packages
