@@ -18,6 +18,7 @@ jobs:
           git clone https://github.com/flutter/flutter.git
           echo "::add-path::${GITHUB_WORKSPACE}/_flutter/bin"
       - name: Set specific Flutter version (Null-safety error workaround)
+        run: |
           flutter version 1.19.0-4.3.pre
           flutter doctor
           flutter clean
