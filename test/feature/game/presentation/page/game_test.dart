@@ -13,9 +13,11 @@ void main() {
 
       expect(find.byType(Hand), findsOneWidget);
 
-      await tester.drag(find.byType(PageView), Offset(0.0, 500.0));
+      final gesture = await tester.startGesture(Offset.zero);
+      await gesture.moveBy(Offset(0.0, -500.0));
+      await tester.pump();
 
-      expect(find.byType(Hand), findsOneWidget);
+      expect(find.byType(Hand), findsNWidgets(2));
     },
   );
 }

@@ -28,6 +28,8 @@ jobs:
           chromedriver/chromedriver --port=4444 &
           sleep 5
           cd ../../../
+      - name: Get packages
+        run: flutter pub get
       - name: Build runner
         run: flutter pub run build_runner build
       - name: Run web flutter driver tests
