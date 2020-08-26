@@ -36,5 +36,7 @@ jobs:
           channel: 'beta'
       - name: Get packages
         run: flutter pub get
+      - name: Build runner
+        run: flutter pub run build_runner build
       - name: Run Flutter Driver tests
         run: flutter drive --target=test_driver/app.dart

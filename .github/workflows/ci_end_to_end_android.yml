@@ -19,6 +19,8 @@ jobs:
           channel: 'beta'
       - name: Get packages
         run: flutter pub get
+      - name: Build runner
+        run: flutter pub run build_runner build
       - name: Run Android Emulator and Flutter Driver tests
         uses: reactivecircus/android-emulator-runner@v2
         with:

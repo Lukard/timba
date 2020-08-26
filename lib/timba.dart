@@ -1,9 +1,9 @@
-import 'package:Timba/privacy_policy.dart';
+import 'package:Timba/feature/privacy_policy/presentation/page/privacy_policy.dart';
 import 'package:flutter/material.dart';
 
-import 'game_grid.dart';
+import 'package:Timba/feature/game/presentation/page/game.dart';
 
-class Game extends StatelessWidget {
+class Timba extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,7 +11,7 @@ class Game extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
-        GameGrid.route: (context) => GameGrid(),
+        Game.route: (context) => Game(),
         PrivacyPolicy.route: (context) => PrivacyPolicy()
       },
     );

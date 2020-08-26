@@ -38,6 +38,8 @@ jobs:
           channel: 'beta'
       - name: Get packages
         run: flutter pub get
+      - name: Build runner
+        run: flutter pub run build_runner build
       - name: Generate keystore
         run: echo $KEY_JKS | base64 -d > android/app/key.jks
         env:
