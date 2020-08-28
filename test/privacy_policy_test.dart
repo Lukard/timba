@@ -1,4 +1,4 @@
-import 'package:Timba/privacy_policy.dart';
+import 'package:Timba/feature/privacy_policy/presentation/page/privacy_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

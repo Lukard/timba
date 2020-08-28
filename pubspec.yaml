@@ -26,11 +26,22 @@ dependencies:
   cupertino_icons: ^0.1.3
   # Google fonts
   google_fonts: ^1.1.0
+  # Dartz - Functional programming
+  dartz: ^0.9.1
+  # Freezed - Data classes, sealed classes
+  freezed_annotation:
+  # Mockito - Mocking
+  mockito: ^4.1.1
+  # Injectable & Get it - Dependency injection
+  injectable:
+  get_it:
 
 dev_dependencies:
-  test: any
   flutter_driver:
     sdk: flutter
+  test: any
+  freezed:
+  injectable_generator:
   build_runner:
   build_web_compilers:
   flutter_launcher_icons: ^0.7.5

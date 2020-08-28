@@ -20,6 +20,8 @@ jobs:
         run: flutter config --enable-web
       - name: Get packages
         run: flutter pub get
+      - name: Build runner
+        run: flutter pub run build_runner build
       - name: Build
         run: flutter build web
       - name: Deploy
