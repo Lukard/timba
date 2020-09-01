@@ -1,5 +1,5 @@
+import 'package:Timba/feature/game/presentation/widget/card.dart' as PokerCard;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Hand extends StatelessWidget {
   final Function provideCard;
@@ -8,26 +8,17 @@ class Hand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size windowSize = MediaQuery.of(context).size;
-    return GridView.count(
-      physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 3,
-      childAspectRatio: windowSize.width * 1.33 / windowSize.height,
+    return Column(
       children: List.generate(
-        12,
-        (index) => Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 0.5,
-              color: Theme.of(context).dividerColor,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              provideCard(index),
-              key: Key(provideCard(index)),
-              style: GoogleFonts.libreBaskerville(
-                textStyle: Theme.of(context).textTheme.headline3,
+        4,
+        (x) => Expanded(
+          child: Row(
+            children: List.generate(
+              3,
+              (y) => Expanded(
+                child: PokerCard.Card(
+                  symbol: provideCard(x * 3 + y),
+                ),
               ),
             ),
           ),
