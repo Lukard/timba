@@ -1,3 +1,4 @@
+import 'package:Timba/feature/game/presentation/widget/card.dart' as PokerCard;
 import 'package:Timba/feature/game/presentation/widget/hand.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,9 +16,7 @@ void main() {
         ),
       );
 
-      for (int index = 0; index < 12; index++) {
-        expect(find.text('$index'), findsOneWidget);
-      }
+      expect(find.byType(PokerCard.Card), findsNWidgets(12));
     },
   );
 }
