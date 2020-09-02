@@ -1,3 +1,4 @@
+import 'package:Timba/feature/game/presentation/widget/animated_grid.dart';
 import 'package:Timba/feature/game/presentation/widget/card.dart' as PokerCard;
 import 'package:flutter/material.dart';
 
@@ -8,16 +9,18 @@ class Hand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(
-        4,
-        (x) => Expanded(
-          child: Row(
-            children: List.generate(
-              3,
-              (y) => Expanded(
-                child: PokerCard.Card(
-                  symbol: provideCard(x * 3 + y),
+    return AnimatedGrid(
+      child: Column(
+        children: List.generate(
+          4,
+          (x) => Expanded(
+            child: Row(
+              children: List.generate(
+                3,
+                (y) => Expanded(
+                  child: PokerCard.Card(
+                    symbol: provideCard(x * 3 + y),
+                  ),
                 ),
               ),
             ),
