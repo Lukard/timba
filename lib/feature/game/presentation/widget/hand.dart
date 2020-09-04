@@ -1,5 +1,5 @@
 import 'package:Timba/feature/game/presentation/widget/animated_grid.dart';
-import 'package:Timba/feature/game/presentation/widget/card.dart' as PokerCard;
+import 'package:Timba/feature/game/presentation/widget/fade_in_card.dart';
 import 'package:flutter/material.dart';
 
 class Hand extends StatelessWidget {
@@ -18,8 +18,9 @@ class Hand extends StatelessWidget {
               children: List.generate(
                 3,
                 (y) => Expanded(
-                  child: PokerCard.Card(
+                  child: FadeInCard(
                     symbol: provideCard(x * 3 + y),
+                    index: x * 3 + y,
                   ),
                 ),
               ),

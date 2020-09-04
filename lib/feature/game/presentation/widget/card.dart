@@ -8,13 +8,17 @@ class Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          symbol,
-          key: Key(symbol),
-          style: GoogleFonts.libreBaskerville(
-            textStyle: Theme.of(context).textTheme.headline3,
+    return AnimatedOpacity(
+      duration: Duration(milliseconds: 600),
+      opacity: 1.0,
+      child: Container(
+        child: Center(
+          child: Text(
+            symbol,
+            key: Key(symbol),
+            style: GoogleFonts.libreBaskerville(
+              textStyle: Theme.of(context).textTheme.headline3,
+            ),
           ),
         ),
       ),
