@@ -17,6 +17,7 @@ class _FadeInCardState extends State<FadeInCard>
     with SingleTickerProviderStateMixin {
   Animation<double> _animation;
   AnimationController _controller;
+  Timer _timer;
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _FadeInCardState extends State<FadeInCard>
         setState(() {});
       });
 
-    Timer(Duration(milliseconds: 800 + widget.index * 100), () {
+    _timer = Timer(Duration(milliseconds: 800 + widget.index * 100), () {
       if (_controller != null) {
         _controller.forward();
       }
@@ -42,6 +43,8 @@ class _FadeInCardState extends State<FadeInCard>
   void dispose() {
     _controller.dispose();
     _controller = null;
+    _timer.cancel();
+    _timer = null;
     super.dispose();
   }
 
