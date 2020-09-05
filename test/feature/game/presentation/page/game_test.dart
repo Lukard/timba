@@ -15,7 +15,7 @@ void main() {
 
       final gesture = await tester.startGesture(Offset.zero);
       await gesture.moveBy(Offset(0.0, -500.0));
-      await tester.pump();
+      await tester.pump(Duration(seconds: 3));
 
       expect(find.byType(Hand), findsNWidgets(2));
     },

@@ -15,6 +15,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump(Duration(seconds: 3));
 
       expect(find.byType(PokerCard.Card), findsNWidgets(12));
     },
