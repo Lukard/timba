@@ -2,6 +2,7 @@ import 'package:Timba/feature/game/domain/card_params.dart';
 import 'package:Timba/feature/game/domain/card_type.dart';
 import 'package:Timba/feature/game/domain/get_card_use_case.dart';
 import 'package:Timba/feature/game/presentation/widget/hand.dart';
+import 'package:Timba/feature/game/presentation/widget/pageview/pointer_aware_page_view.dart';
 import 'package:Timba/injection.dart';
 import 'package:flutter/material.dart';
 
@@ -10,15 +11,12 @@ class Game extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController();
     return Scaffold(
       body: MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: PageView(
+        child: PointerAwarePageView(
           key: Key("pageview"),
-          controller: controller,
-          scrollDirection: Axis.vertical,
           children: [
             Hand(provideCard: getStoryPoint),
             Hand(provideCard: getShirtSize),
