@@ -1,0 +1,1 @@
+enum PointerAwarePageViewInteractionEvent { startPointerScroll, endPointerScroll }

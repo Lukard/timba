@@ -37,6 +37,13 @@ lib/generated_plugin_registrant.dart
 # Symbolication related
 app.*.symbols
 
+# Generated code related
+**/test/**/*.g.dart
+**/test/**/*.freezed.dart
+
+# Coverage related
+/coverage/
+
 # Obfuscation related
 app.*.map.json
 
