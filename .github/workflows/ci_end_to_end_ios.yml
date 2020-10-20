@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         device:
-          - iPhone 8 (13.6)
+          - iPhone 8 (13.7)
       fail-fast: false
     runs-on: macOS-latest
     steps:
