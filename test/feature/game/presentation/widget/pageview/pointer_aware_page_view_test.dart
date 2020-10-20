@@ -25,8 +25,7 @@ void main() {
       final Offset scrollEventLocation = tester.getCenter(find.byType(PointerAwarePageView));
       final TestPointer testPointer = TestPointer(1, PointerDeviceKind.mouse);
       testPointer.hover(scrollEventLocation);
-      final HitTestResult result = tester.hitTestOnBinding(scrollEventLocation);
-      await tester.sendEventToBinding(testPointer.scroll(const Offset(0.0, 1.0)), result);
+      await tester.sendEventToBinding(testPointer.scroll(const Offset(0.0, 1.0)));
       await tester.pumpAndSettle();
 
       expect(find.text('2'), findsOneWidget);
